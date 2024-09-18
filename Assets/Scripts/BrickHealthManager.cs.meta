@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: b50c6b0b50a09410daa02fac757ec548
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - birckDestroyPartical: {fileID: 2497139827174693056, guid: a841d0375b9fe420fb51480596a67a57, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
