@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GiftLevelMgr : MonoBehaviour
 {
@@ -28,13 +29,22 @@ public class GiftLevelMgr : MonoBehaviour
         
     }
 
-    public void SetGiftLevel(bool _isSelect,int _levelNum)
+    public void SetGiftLevel(int _levelNum)
     {
+        bool isSelect;
+        if (_levelNum == levelManager.currentLevel)
+        {
+            isSelect = true;
+        }
+        else
+        {
+            isSelect = false;
+        }
         if (levelManager.levelPass[_levelNum-1] == 1)
         {
             //已经通过的关卡，礼物盒子打开
             allImages[1].sprite = giftImage[0];
-            if (_isSelect)
+            if (isSelect)
             {
                 allImages[0].sprite = bgImage[1];
             }
@@ -45,11 +55,15 @@ public class GiftLevelMgr : MonoBehaviour
         }
         else
         {
-            Debug.Log("进来了");
             allImages[1].sprite = giftImage[1];
             allImages[0].sprite = bgImage[2];
         }
     }
 
+    //点击礼物盒子则触发该函数
+    public void ClickGiftLevel()
+    {
+        SceneManager.LoadScene("GamePage");
+    }
 
 }

@@ -5,17 +5,21 @@ using System;
 
 public class LevelManager : MonoBehaviour
 {
-    public int[] levelPass = new int[100];//先假设是 100 关，0 是未完成，1 是已完成
-    public int[] starNum = new int[100];//每一关的星星个数
+    public int[] levelPass = new int[100];//先假设是 100 关，0 是未解锁，1 是已解锁
+    public int[] starNum = new int[100];//每一关的星星个数,是0，1，2，3
+    public int currentLevel;//记录
+    private System.Random r;
 
     // Start is called before the first frame update
     void Start()
     {
-        for(int i=0; i < 27; i++)
+        r = new System.Random();
+        for (int i=0; i < 13; i++)
         {
             levelPass[i] = 1;//造个数据，前 27 关已过
-            starNum[i] = 2;
+            starNum[i] = r.Next(0, 3);
         }
+        currentLevel = 5;
     }
 
     // Update is called once per frame
@@ -24,7 +28,8 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下
+
+    //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下生成真是的关卡
     public int GetRealLevel(int _level)
     {
         if (_level % 10 < 5)
