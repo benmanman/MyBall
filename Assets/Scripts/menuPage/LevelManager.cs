@@ -13,13 +13,16 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         r = new System.Random();
         for (int i=0; i < 13; i++)
         {
             levelPass[i] = 1;//造个数据，前 27 关已过
             starNum[i] = r.Next(0, 3);
         }
-        currentLevel = 5;
+        currentLevel = 5;*/
+
+        //start的时候需要读取保存在本地的关卡数据
     }
 
     // Update is called once per frame
