@@ -19,10 +19,6 @@ public class CreateLevel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void createMyLevel(int _howManyLevel)
     {
         //生成 100个关卡

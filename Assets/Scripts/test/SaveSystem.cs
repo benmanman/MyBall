@@ -11,16 +11,16 @@ public static class SaveSystem
         PlayerPrefs.SetString(key, json);
         PlayerPrefs.Save();
     }
-
+    /*
     public static string LoadFromJson(string key)
     {
         return PlayerPrefs.GetString(key,null);
-    }
+    }*/
 
     public static void SaveByJson(string saveFileName, object data)
     {
         var json = JsonUtility.ToJson(data);
-        Debug.Log("我保存的json:"+json);
+        Debug.Log("save json:"+json);
         var path = Path.Combine(Application.persistentDataPath, saveFileName);
 
         try
@@ -41,6 +41,7 @@ public static class SaveSystem
         try
         {
             var json = File.ReadAllText(path);
+            Debug.Log("load json:" + json);
             var data = JsonUtility.FromJson<T>(json);
             return data;
 

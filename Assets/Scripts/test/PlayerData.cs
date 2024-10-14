@@ -20,6 +20,8 @@ public class PlayerData : MonoBehaviour
         public int[] myint= { 6,7,8};
     }
 
+
+
     public void Save()
     {
         SaveByJson();
@@ -27,24 +29,13 @@ public class PlayerData : MonoBehaviour
 
     public void Load()
     {
+        
         LoadFromJson();
     }
 
-    void LoadByPlayerPrefabs()
+    void SetData(SaveData _data)
     {
-        var json = SaveSystem.LoadFromJson(PLAYER_DATA_KEY);
-        var saveData = JsonUtility.FromJson<SaveData>(json);
-        playerName = saveData.playerName;
-        level = saveData.playerLevel;
-        coin = saveData.playerCoin;
-
-        //data2Data(saveData.myint,testlevel);
-    }
-
-    [UnityEditor.MenuItem("Developer/Delete All Data")]
-    public static void DeletePlayerDataPrefs()
-    {
-        PlayerPrefs.DeleteAll();
+        _data.myint[2] = 10;
     }
 
     void SaveByJson()
@@ -56,29 +47,10 @@ public class PlayerData : MonoBehaviour
     {
         var saveData = SaveSystem.LoadFromJson<SaveData>(PLAYER_DATA_FILE_NAME);
         loadData(saveData);
+        SetData(saveData);
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-   /* private void data2Data(int[] orig, int[] final)
-    {
-        for(int i=0; i<orig.Length; i++)
-        {
-            final[i] = orig[i];
-        }
-    }*/
-
+    // 声明一个data class ，然后把各个变量进行复制并返回class类型
     SaveData SavingData()
     {
         var saveData = new SaveData();

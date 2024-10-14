@@ -5,40 +5,66 @@ using UnityEngine.UI;
 
 public class MyDataMgr : MonoBehaviour
 {
-    public int[] testarray = { 0, 1, 2, 3, 4, 5 };
-    public int[] testload;
+    [SerializeField] string playerName = "PlayerName";//用户名字
+    [SerializeField] int[] levels;//用户所有关卡的通关信息，0 是未通过，1 是已通过
+    [SerializeField] int coin = 0;//用户金币
+    [SerializeField] int[] stars;//用户每个关卡对应的星星数
 
-    // Start is called before the first frame update
-    void Start()
+    const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
+
+    [System.Serializable]
+    class SaveMyUserData
     {
-        
+        public string _playerName;
+        public int[] _playerLevel;
+        public int _playerCoin;
+        public int[] _playStar;
     }
 
-    // Update is called once per frame
-    void Update()
+    //对外展示的存储函数
+    public void Save()
     {
-        
+        SaveByJson();
     }
 
-    //存储 int 数组
-    public void SaveMyIntArray(int[] array_tobesave, string key)
+    //对外展示的读数据函数
+    public void Load()
     {
-        string array_json = JsonUtility.ToJson(array_tobesave);
-        PlayerPrefs.SetString(key, array_json);
-        PlayerPrefs.Save();
+
+        LoadFromJson();
     }
 
-    //读取 int 数组
-    public void LoadMyIntArray(int[] loadArray, string key)
+
+    void SaveByJson()
     {
-        if (PlayerPrefs.HasKey(key))
-        {
-            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key), loadArray);
-        }
+        SaveSystem.SaveByJson(MY_PLAYER_DATA_FILE_NAME, SavingData());
     }
 
-    //存储 string
+    void LoadFromJson()
+    {
+        var saveData = SaveSystem.LoadFromJson<SaveMyUserData>(MY_PLAYER_DATA_FILE_NAME);
+        loadData(saveData);
+    }
 
+    // 声明一个data class ，然后把各个变量进行复制并返回class类型
+    SaveMyUserData SavingData()
+    {
+        var PlayerData = new SaveMyUserData();
+
+        PlayerData._playerName = playerName;
+        PlayerData._playerLevel = levels;
+        PlayerData._playerCoin = coin;
+        PlayerData._playStar = stars;
+        return PlayerData;
+    }
+
+    void loadData(SaveMyUserData PlayerData)
+    {
+        playerName = PlayerData._playerName;
+        levels = PlayerData._playerLevel;
+        coin = PlayerData._playerCoin;
+        stars = PlayerData._playStar;
+    }
 
 
 }
