@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] public int coin = 0;//用户金币
     [SerializeField] public int[] starNum = new int[100];//用户每个关卡对应的星星数
     [SerializeField] public int currentLevel = 0;//用户金币
+    [SerializeField] public bool hasInitial = false;//标记该用户是否被初始化过
+
 
 
     const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
@@ -24,6 +26,8 @@ public class LevelManager : MonoBehaviour
         public int _playerCoin;
         public int[] _playStar;
         public int _currentLevel;
+        public bool _hasInitial;
+
     }
 
     //对外展示的存储函数
@@ -60,6 +64,7 @@ public class LevelManager : MonoBehaviour
         PlayerData._playerCoin = coin;
         PlayerData._playStar = starNum;
         PlayerData._currentLevel = currentLevel;
+        PlayerData._hasInitial = hasInitial;
         return PlayerData;
     }
 
@@ -70,24 +75,17 @@ public class LevelManager : MonoBehaviour
         coin = PlayerData._playerCoin;
         starNum = PlayerData._playStar;
         currentLevel = PlayerData._currentLevel;
-        Debug.Log("chengg load");
+        hasInitial=PlayerData._hasInitial;
     }
 
+    private void Awake()
+    {
+        InitialUserData();
+    }
     // Start is called before the first frame update
     void Start()
     {
-       // InitialUserData();
-        /*
-        r = new System.Random();
-        for (int i=0; i < 13; i++)
-        {
-            
-            levelPass[i] = 1;//造个数据，前 27 关已过
-            starNum[i] = r.Next(0, 3);
-        }
-        currentLevel = 5;
-        */
-        //start的时候需要读取保存在本地的关卡数据
+        
     }
 
 
@@ -109,15 +107,21 @@ public class LevelManager : MonoBehaviour
     //初始化,当用户是新用户时，我们调用初始化数据
     void InitialUserData()
     {
-        playerName = "New User Blue";
-        levelPass[0] = 1;
-        starNum[0] = 0;
-        currentLevel = 1;
-        coin = 0;
-        for (int i=1; i < 100; i++)
+        LoadFromJson();
+        //如果加载数据后发现当前关卡就是第一关
+        if (hasInitial == false)
         {
-            levelPass[i] = 0;
-            starNum[i] = 0;
+            playerName = "New User Blue";
+            levelPass[0] = 1;
+            starNum[0] = 0;
+            currentLevel = 1;
+            coin = 0;
+            hasInitial = true;
+            for (int i = 1; i < 100; i++)
+            {
+                levelPass[i] = 0;
+                starNum[i] = 0;
+            }
         }
         Save();
     }
