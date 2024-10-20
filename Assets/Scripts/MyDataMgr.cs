@@ -34,6 +34,10 @@ public class MyDataMgr : MonoBehaviour
         LoadFromJson();
     }
 
+    public void DeleteData()
+    {
+
+    }
 
     void SaveByJson()
     {
@@ -44,6 +48,11 @@ public class MyDataMgr : MonoBehaviour
     {
         var saveData = SaveSystem.LoadFromJson<SaveMyUserData>(MY_PLAYER_DATA_FILE_NAME);
         loadData(saveData);
+    }
+
+    void DeleteFile()
+    {
+        SaveSystem.DeleteSaveFile(MY_PLAYER_DATA_FILE_NAME);
     }
 
     // 声明一个data class ，然后把各个变量进行复制并返回class类型

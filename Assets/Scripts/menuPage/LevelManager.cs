@@ -7,13 +7,12 @@ public class LevelManager : MonoBehaviour
 {
     private System.Random r;
 
-    [SerializeField] public string playerName = "PlayerName";//用户名字
+    [SerializeField] public string playerName = "PlayerName12";//用户名字
     [SerializeField] public int[] levelPass= new int[100];//用户所有关卡的通关信息，0 是未通过，1 是已通过
     [SerializeField] public int coin = 0;//用户金币
     [SerializeField] public int[] starNum = new int[100];//用户每个关卡对应的星星数
-    [SerializeField] public int currentLevel = 0;//用户金币
+    [SerializeField] public int currentLevel = 1;//用户金币
     [SerializeField] public bool hasInitial = false;//标记该用户是否被初始化过
-
 
 
     const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
@@ -40,6 +39,11 @@ public class LevelManager : MonoBehaviour
     public void Load()
     {
         LoadFromJson();
+    }
+
+    public void DeleteData()
+    {
+        SaveSystem.DeleteSaveFile(MY_PLAYER_DATA_FILE_NAME);
     }
 
 
@@ -78,18 +82,13 @@ public class LevelManager : MonoBehaviour
         hasInitial=PlayerData._hasInitial;
     }
 
-    private void Awake()
+    private void Start()
     {
         InitialUserData();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
 
-    //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下生成真是的关卡
+    //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下生成真实的关卡
     public int GetRealLevel(int _level)
     {
         if (_level % 10 < 5)
@@ -108,10 +107,13 @@ public class LevelManager : MonoBehaviour
     void InitialUserData()
     {
         LoadFromJson();
+        Debug.Log("get json了哦"+ playerName);
+        //if () ;
         //如果加载数据后发现当前关卡就是第一关
         if (hasInitial == false)
         {
-            playerName = "New User Blue";
+            Debug.Log("在这里打印"+ playerName);
+            playerName = "New User Blue"+r.Next(1,10);
             levelPass[0] = 1;
             starNum[0] = 0;
             currentLevel = 1;

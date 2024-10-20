@@ -5,16 +5,11 @@ using System.IO;
 
 public static class SaveSystem
 {
-    public static void SavePlayerPrefabs(string key, object data)
+   /* public static void SavePlayerPrefabs(string key, object data)
     {
         var json = JsonUtility.ToJson(data);
         PlayerPrefs.SetString(key, json);
         PlayerPrefs.Save();
-    }
-    /*
-    public static string LoadFromJson(string key)
-    {
-        return PlayerPrefs.GetString(key,null);
     }*/
 
     public static void SaveByJson(string saveFileName, object data)
@@ -40,6 +35,11 @@ public static class SaveSystem
 
         try
         {
+            if (!File.Exists(path))
+            {
+                File.Create(path + saveFileName);
+                
+            }
             var json = File.ReadAllText(path);
             Debug.Log("load json:" + json);
             var data = JsonUtility.FromJson<T>(json);

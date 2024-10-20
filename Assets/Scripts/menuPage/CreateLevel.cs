@@ -15,6 +15,7 @@ public class CreateLevel : MonoBehaviour
     {
         //生成 100 个关卡
         levelManager = FindObjectOfType<LevelManager>();
+        Debug.Log("start函数中levelmanager的玩家姓名" + levelManager.playerName);
         createMyLevel(100);
     }
 
@@ -32,7 +33,7 @@ public class CreateLevel : MonoBehaviour
                 CreateGiftLevel(realLevel);
             }else
             {
-                CreateNormalLevel(realLevel, 1);
+                CreateNormalLevel(realLevel, levelManager.starNum[realLevel]);
             }
         }
     }

@@ -20,15 +20,32 @@ public class TopFuncs : MonoBehaviour
     {
         
     }
-
+    //从别的页面进入menu 页面时，刷新一下页面上的数据
     private void FreshMenuData()
     {
         diamondsNum.text = levelManager.coin.ToString();
+
     }
 
     public void ClickBag()
     {
         levelManager.SetCoin(88);
+        FreshMenuData();
+    }
+
+    public void ClickDelete()
+    {
+        levelManager.DeleteData();
+    }
+
+
+    //测试阶段，每点击一次，级别升 1
+    public void ClickSetting()
+    {
+        levelManager.levelPass[levelManager.currentLevel] = 1;
+        levelManager.starNum[levelManager.currentLevel] = 3;
+        levelManager.currentLevel++;
+        levelManager.Save();
         FreshMenuData();
     }
 }
