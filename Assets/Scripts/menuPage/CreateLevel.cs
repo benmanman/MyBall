@@ -8,14 +8,14 @@ public class CreateLevel : MonoBehaviour
     public GameObject normalLevel;//普通关卡的prefab
     public GameObject giftLevel;//礼物关卡的prefab 
     public Transform levelFatherTransform;
-    LevelManager levelManager;
+    //LevelManager levelManager;
     
     // Start is called before the first frame update
     void Start()
     {
         //生成 100 个关卡
-        levelManager = FindObjectOfType<LevelManager>();
-        Debug.Log("start函数中levelmanager的玩家姓名" + levelManager.playerName);
+        //levelManager = FindObjectOfType<LevelManager>();
+        Debug.Log("start函数中levelmanager的玩家姓名" + LevelManager.playerName);
         createMyLevel(100);
     }
 
@@ -26,14 +26,14 @@ public class CreateLevel : MonoBehaviour
         
         for (int i = 0; i < _howManyLevel; i++)
         {
-            int realLevel = levelManager.GetRealLevel(i);
+            int realLevel = LevelManager.GetRealLevel(i);
             //如果是 5 的整数倍，那就是礼物盒子
             if ((realLevel) % 5 == 0)
             {
                 CreateGiftLevel(realLevel);
             }else
             {
-                CreateNormalLevel(realLevel, levelManager.starNum[realLevel]);
+                CreateNormalLevel(realLevel, LevelManager.starNum[realLevel]);
             }
         }
     }

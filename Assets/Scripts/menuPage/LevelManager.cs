@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LevelManager : MonoBehaviour
+public static class LevelManager
 {
-    private System.Random r;
+    private static System.Random r;
 
-    [SerializeField] public string playerName = "PlayerName12";//用户名字
-    [SerializeField] public int[] levelPass= new int[100];//用户所有关卡的通关信息，0 是未通过，1 是已通过
-    [SerializeField] public int coin = 0;//用户金币
-    [SerializeField] public int[] starNum = new int[100];//用户每个关卡对应的星星数
-    [SerializeField] public int currentLevel = 1;//用户金币
-    [SerializeField] public bool hasInitial = false;//标记该用户是否被初始化过
+    [SerializeField] public static string playerName = "PlayerName12";//用户名字
+    [SerializeField] public static int[] levelPass= new int[100];//用户所有关卡的通关信息，0 是未通过，1 是已通过
+    [SerializeField] public static int coin = 0;//用户金币
+    [SerializeField] public static int[] starNum = new int[100];//用户每个关卡对应的星星数
+    [SerializeField] public static int currentLevel = 1;//用户金币
+    [SerializeField] public static bool hasInitial = false;//标记该用户是否被初始化过
 
 
     const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
 
     [System.Serializable]
-    class SaveMyUserData
+    public class SaveMyUserData
     {
         public string _playerName;
         public int[] _playerLevel;
@@ -26,40 +26,53 @@ public class LevelManager : MonoBehaviour
         public int[] _playStar;
         public int _currentLevel;
         public bool _hasInitial;
-
+        public SaveMyUserData()
+        {
+            _playerName = "PlayerName12";
+            _playerLevel = new int[100];
+            _playerCoin = 0;
+            _playStar = new int[100];
+            _currentLevel = 1;
+            _hasInitial = false;
+        }
     }
 
     //对外展示的存储函数
-    public void Save()
+    public static void Save()
     {
         SaveByJson();
     }
 
     //对外展示的读数据函数
-    public void Load()
+    public static void Load()
     {
         LoadFromJson();
     }
 
-    public void DeleteData()
+    public static void DeleteData()
     {
         SaveSystem.DeleteSaveFile(MY_PLAYER_DATA_FILE_NAME);
     }
 
 
-    void SaveByJson()
+    static void SaveByJson()
     {
         SaveSystem.SaveByJson(MY_PLAYER_DATA_FILE_NAME, SavingData());
     }
 
-    void LoadFromJson()
+    static void LoadFromJson()
     {
         var saveData = SaveSystem.LoadFromJson<SaveMyUserData>(MY_PLAYER_DATA_FILE_NAME);
+        if (saveData == null)
+        {
+            saveData = new SaveMyUserData();
+        }
         loadData(saveData);
+
     }
 
     // 声明一个data class ，然后把各个变量进行复制并返回class类型
-    SaveMyUserData SavingData()
+    static SaveMyUserData SavingData()
     {
         var PlayerData = new SaveMyUserData();
 
@@ -72,7 +85,7 @@ public class LevelManager : MonoBehaviour
         return PlayerData;
     }
 
-    void loadData(SaveMyUserData PlayerData)
+    static void loadData(SaveMyUserData PlayerData)
     {
         playerName = PlayerData._playerName;
         levelPass = PlayerData._playerLevel;
@@ -82,14 +95,15 @@ public class LevelManager : MonoBehaviour
         hasInitial=PlayerData._hasInitial;
     }
 
-    private void Start()
+    static private void Awake()
     {
+        r = new System.Random();
         InitialUserData();
     }
 
 
     //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下生成真实的关卡
-    public int GetRealLevel(int _level)
+    public static int GetRealLevel(int _level)
     {
         if (_level % 10 < 5)
         {
@@ -104,15 +118,11 @@ public class LevelManager : MonoBehaviour
     }
 
     //初始化,当用户是新用户时，我们调用初始化数据
-    void InitialUserData()
+    static void InitialUserData()
     {
         LoadFromJson();
-        Debug.Log("get json了哦"+ playerName);
-        //if () ;
-        //如果加载数据后发现当前关卡就是第一关
         if (hasInitial == false)
         {
-            Debug.Log("在这里打印"+ playerName);
             playerName = "New User Blue"+r.Next(1,10);
             levelPass[0] = 1;
             starNum[0] = 0;
@@ -129,19 +139,19 @@ public class LevelManager : MonoBehaviour
     }
 
     //设置所有值
-    public void SetCoin(int _coin)
+    public static void SetCoin(int _coin)
     {
         coin = _coin;
         Save();
     }
     //当前通过的关卡、通过关卡的星星、下一个关卡开启
-    public void SetLevel_Star(int _level, int _star)
+    public static void SetLevel_Star(int _level, int _star)
     {
         levelPass[_level] = 1;
         starNum[_level] = _star;
         Save();
     }
-    public void SetName(string _name)
+    public static void SetName(string _name)
     {
         playerName = _name;
         Save();

@@ -21,9 +21,9 @@ public static class SaveSystem
         try
         {
             File.WriteAllText(path, json);
-
+            Debug.Log("保存成功" + json);
         }
-        catch(System.Exception exception)
+        catch (System.Exception exception)
         {
             Debug.LogError($"Failed to save data to {path}.\n{exception}");
         }
@@ -46,9 +46,9 @@ public static class SaveSystem
             return data;
 
         }
-        catch (System.Exception exception)
+       catch (System.Exception exception)
         {
-            Debug.LogError($"Failed to load data to {path}.\n{exception}");
+            //Debug.LogError($"Failed to load data to {path}.\n{exception}");
             return default;
         }
     }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class testmylevel : MonoBehaviour
 {
-    LevelManager levelManager;
+    //LevelManager levelManager;
     private void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+       // levelManager = FindObjectOfType<LevelManager>();
     }
 
     public void wingame()
     {
-        levelManager.SetLevel_Star(levelManager.currentLevel, 3);
-        levelManager.currentLevel++;
+        LevelManager.SetLevel_Star(LevelManager.currentLevel, 3);
+        LevelManager.currentLevel++;
     }
 }

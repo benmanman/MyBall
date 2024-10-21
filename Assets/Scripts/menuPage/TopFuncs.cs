@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TopFuncs : MonoBehaviour
 {
 
     public Text diamondsNum;
-    private LevelManager levelManager;
+    //private LevelManager levelManager;
+    public System.Random r;
     // Start is called before the first frame update
     void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+       // levelManager = FindObjectOfType<LevelManager>();
+        r = new System.Random();
         FreshMenuData();
     }
 
@@ -23,29 +26,29 @@ public class TopFuncs : MonoBehaviour
     //从别的页面进入menu 页面时，刷新一下页面上的数据
     private void FreshMenuData()
     {
-        diamondsNum.text = levelManager.coin.ToString();
-
+        diamondsNum.text = LevelManager.coin.ToString();
     }
 
     public void ClickBag()
     {
-        levelManager.SetCoin(88);
+        LevelManager.SetCoin(88);
         FreshMenuData();
     }
 
     public void ClickDelete()
     {
-        levelManager.DeleteData();
+        LevelManager.DeleteData();
+        FreshMenuData();
     }
-
 
     //测试阶段，每点击一次，级别升 1
     public void ClickSetting()
     {
-        levelManager.levelPass[levelManager.currentLevel] = 1;
-        levelManager.starNum[levelManager.currentLevel] = 3;
-        levelManager.currentLevel++;
-        levelManager.Save();
+        LevelManager.levelPass[LevelManager.currentLevel] = 1;
+        LevelManager.starNum[LevelManager.currentLevel] = r.Next(1,4);
+        Debug.Log(LevelManager.starNum[LevelManager.currentLevel]);
+        LevelManager.currentLevel++;
+        LevelManager.Save();
         FreshMenuData();
     }
 }

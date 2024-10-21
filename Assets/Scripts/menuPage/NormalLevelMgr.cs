@@ -11,14 +11,14 @@ public class NormalLevelMgr : MonoBehaviour
     private Image[] allImage;//0 是背景，1 是箭头，2-4 是星星，5 是锁
     private Text levelNumText;
     public GameObject totalbgWithArrow;
-    private LevelManager levelManager;
+    //private LevelManager levelManager;
 
     private void Awake()
     {
         //0是背景图，1 是箭头，2 是，3，4，5 是星星
         allImage= this.gameObject.GetComponentsInChildren<Image>();
         levelNumText = this.gameObject.GetComponentInChildren<Text>();
-        levelManager = FindObjectOfType<LevelManager>();
+        //levelManager = FindObjectOfType<LevelManager>();
     }
 
     public void SetNormalLevel(int levelNum)
@@ -26,7 +26,7 @@ public class NormalLevelMgr : MonoBehaviour
         //情况 1：已解锁未选中，情况 2：已解锁已选中，情况 3：未解锁
         //先设置背景图片，关卡数字
         bool isSelect;
-        if(levelNum == levelManager.currentLevel)
+        if(levelNum == LevelManager.currentLevel)
         {
             isSelect = true;
         }
@@ -64,26 +64,26 @@ public class NormalLevelMgr : MonoBehaviour
     }
     private void SetbgImage(bool isSelect, int levelNum)
     {
-        if (levelManager.levelPass[levelNum] == 1)
+        if (LevelManager.levelPass[levelNum] == 1)
         {
             if (isSelect)//如果已选中
             {
                 allImage[0].sprite = bg[1];//选中图
                 allImage[5].enabled = false;//若是已经解锁的，就隐藏锁
-                SetStarsUnable(true, levelManager.starNum[levelNum]);//展示星星
+                SetStarsUnable(true, LevelManager.starNum[levelNum]);//展示星星
             }
             else
             {
                 allImage[0].sprite = bg[0];//未选中图
                 allImage[5].enabled = false;//若是已经解锁的，就隐藏锁
-                SetStarsUnable(true, levelManager.starNum[levelNum]);//展示星星
+                SetStarsUnable(true, LevelManager.starNum[levelNum]);//展示星星
             }
         }
         else
         {
             allImage[0].sprite = bg[2];//未解锁，只有一种情况
             allImage[5].enabled = true;//若是未解锁，则展示锁
-            SetStarsUnable(false, levelManager.starNum[levelNum]);// 不显示星星
+            SetStarsUnable(false, LevelManager.starNum[levelNum]);// 不显示星星
 
             levelNumText.GetComponentInChildren<Outline>().enabled = false;
         }
@@ -92,7 +92,11 @@ public class NormalLevelMgr : MonoBehaviour
     //点击关卡则触发该函数
     public void ClickNormalLevel()
     {
-        SceneManager.LoadScene("GamePage");
+        //如果这个关卡没有通过，那么就点击无效
+        if (LevelManager.levelPass[int.Parse(levelNumText.text)] == 1)
+        {
+            SceneManager.LoadScene("GamePage");
+        }
     }
 
     private void SetStarsUnable(bool _show, int _starNum)

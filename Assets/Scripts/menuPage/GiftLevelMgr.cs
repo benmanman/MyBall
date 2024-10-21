@@ -9,12 +9,12 @@ public class GiftLevelMgr : MonoBehaviour
     Image[] allImages;//0是背景，1 是礼物图片
     public Sprite[] giftImage;//0是打开的礼物,1是没打开的礼物
     public Sprite[] bgImage;//0是未选中,1是选中,2是未解锁
-    LevelManager levelManager;
+//    LevelManager levelManager;
 
     private void Awake()
     {
         allImages = this.gameObject.GetComponentsInChildren<Image>();
-        levelManager = FindObjectOfType<LevelManager>();
+       // levelManager = FindObjectOfType<LevelManager>();
     }
 
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class GiftLevelMgr : MonoBehaviour
     public void SetGiftLevel(int _levelNum)
     {
         bool isSelect;
-        if (_levelNum == levelManager.currentLevel)
+        if (_levelNum == LevelManager.currentLevel)
         {
             isSelect = true;
         }
@@ -40,7 +40,7 @@ public class GiftLevelMgr : MonoBehaviour
         {
             isSelect = false;
         }
-        if (levelManager.levelPass[_levelNum-1] == 1)
+        if (LevelManager.levelPass[_levelNum-1] == 1)
         {
             //已经通过的关卡，礼物盒子打开
             allImages[1].sprite = giftImage[0];
