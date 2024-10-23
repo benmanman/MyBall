@@ -28,7 +28,7 @@ public static class LevelManager
         public bool _hasInitial;
         public SaveMyUserData()
         {
-            _playerName = "PlayerName12";
+            _playerName = "PlayerName13";
             _playerLevel = new int[100];
             _playerCoin = 0;
             _playStar = new int[100];

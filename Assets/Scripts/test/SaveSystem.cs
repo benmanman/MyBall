@@ -38,10 +38,10 @@ public static class SaveSystem
             if (!File.Exists(path))
             {
                 File.Create(path + saveFileName);
-                
+                Debug.Log("路径不存在，已创建新的");
             }
             var json = File.ReadAllText(path);
-            Debug.Log("load json:" + json);
+            Debug.Log("拿到 json啦:" + json);
             var data = JsonUtility.FromJson<T>(json);
             return data;
 
