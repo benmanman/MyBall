@@ -34,12 +34,12 @@ public class EndGameManager : MonoBehaviour
 
     public void Retry()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("GamePage");
     }
 
     public void Quit()
     {
-        Application.Quit();
+        SceneManager.LoadScene("MenuPage");
     }
 
 }
