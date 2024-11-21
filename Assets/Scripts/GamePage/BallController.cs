@@ -32,6 +32,7 @@ public class BallController : MonoBehaviour
     public Vector3 ballLaunchPosition;
     public bool isPress = false;
     public Vector2 ballPosition;
+ 
 
 
     // Start is called before the first frame update
@@ -43,7 +44,7 @@ public class BallController : MonoBehaviour
         currentBallState = ballState.aim;//开始游戏，所有的球默认是可发射状态
         //gameManager.ballsInScene.Add(this.gameObject);//这步是把主球也加到这个池子里
         ballPosition = this.gameObject.transform.position;
-
+  
     }
 
     // Update is called once per frame
@@ -55,7 +56,7 @@ public class BallController : MonoBehaviour
             case ballState.aim:
                 ballStop.colletBallNum = 0;//结束一次射击，将收集小球个数重置
                 extraBallManager.numberOfBallsToFire = gameManager.ballsInScene.Count;//结束一次射击，将待发射的小球个数重置
-                
+
                 if (Input.GetMouseButtonDown(0))//点击鼠标左键
                 {
                     MouseClicked();

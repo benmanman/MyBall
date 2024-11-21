@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SuccessPanel : MonoBehaviour
 {
@@ -20,13 +21,35 @@ public class SuccessPanel : MonoBehaviour
 
     //弹窗出现时就把等级+1
 
-    void ClickNextLevel()
+    public void ClickNextLevel()
     {
         //点击下一关后， 弹窗消失，加载下一关prefab
+        //先让弹窗消失
+        ShowGameWin(false);
+        SceneManager.LoadScene("GamePage");
+        //本关卡信息
+        // load 下一关prefab
+    }
+
+    //点击关闭按钮，回到menu页面
+    public void ClickClose()
+    {
+        //点击下一关后， 弹窗消失，加载下一关prefab
+        //先让弹窗消失
+        //ShowGameWin(false);
+        SceneManager.LoadScene("MenuPage");
+        //本关卡信息
+        // load 下一关prefab
     }
 
     public void ShowGameWin(bool show)
     {
+        //记录本关的数据,待修改为实际数字
+        LevelManager.starNum[LevelManager.currentLevel] = 2;
+        LevelManager.levelPass[LevelManager.currentLevel] = 1;
+        LevelManager.currentLevel++;
+        LevelManager.Save();
+        //游戏成功弹窗显示
         this.gameObject.SetActive(show);
     }
 

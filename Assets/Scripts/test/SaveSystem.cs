@@ -32,7 +32,6 @@ public static class SaveSystem
     public static T LoadFromJson<T>(string saveFileName)
     {
         var path = Path.Combine(Application.persistentDataPath, saveFileName);
-
         try
         {
             if (!File.Exists(path))
@@ -60,6 +59,7 @@ public static class SaveSystem
         try
         {
             File.Delete(path);
+            Debug.Log("文件删除成功");
         }
         catch(System.Exception exception)
         {

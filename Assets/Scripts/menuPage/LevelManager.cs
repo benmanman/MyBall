@@ -7,11 +7,11 @@ public static class LevelManager
 {
     private static System.Random r;
 
-    [SerializeField] public static string playerName = "PlayerName12";//用户名字
+    [SerializeField] public static string playerName = "PlayerName88";//用户名字
     [SerializeField] public static int[] levelPass= new int[100];//用户所有关卡的通关信息，0 是未通过，1 是已通过
     [SerializeField] public static int coin = 0;//用户金币
     [SerializeField] public static int[] starNum = new int[100];//用户每个关卡对应的星星数
-    [SerializeField] public static int currentLevel = 1;//用户金币
+    [SerializeField] public static int currentLevel = 0;//用户当前关卡
     [SerializeField] public static bool hasInitial = false;//标记该用户是否被初始化过
 
 
@@ -28,12 +28,13 @@ public static class LevelManager
         public bool _hasInitial;
         public SaveMyUserData()
         {
-            _playerName = "PlayerName13";
+            _playerName = "PlayerName66";
             _playerLevel = new int[100];
             _playerCoin = 0;
             _playStar = new int[100];
-            _currentLevel = 1;
+            _currentLevel = 0;
             _hasInitial = false;
+            _playerLevel[_currentLevel] = 1;
         }
     }
 
@@ -66,9 +67,10 @@ public static class LevelManager
         if (saveData == null)
         {
             saveData = new SaveMyUserData();
+            //
+            Debug.Log("这里拿到的是空的");
         }
         loadData(saveData);
-
     }
 
     // 声明一个data class ，然后把各个变量进行复制并返回class类型
@@ -88,16 +90,21 @@ public static class LevelManager
     static void loadData(SaveMyUserData PlayerData)
     {
         playerName = PlayerData._playerName;
+        Debug.Log("这是load data"+playerName);
         levelPass = PlayerData._playerLevel;
+        Debug.Log("这是load data" + levelPass[0]);
         coin = PlayerData._playerCoin;
         starNum = PlayerData._playStar;
         currentLevel = PlayerData._currentLevel;
-        hasInitial=PlayerData._hasInitial;
+        Debug.Log("这是load data" + currentLevel);
+        hasInitial =PlayerData._hasInitial;
+        Debug.Log("load结束");
     }
 
     static private void Awake()
     {
         r = new System.Random();
+        Debug.Log("调用初始化");
         InitialUserData();
     }
 
@@ -121,12 +128,15 @@ public static class LevelManager
     static void InitialUserData()
     {
         LoadFromJson();
-        if (hasInitial == false)
+        Debug.Log("打印初始化状态"+LevelManager.hasInitial);
+        if (!hasInitial)
         {
             playerName = "New User Blue"+r.Next(1,10);
+            Debug.Log(playerName);
             levelPass[0] = 1;
+            Debug.Log(levelPass[0]);
             starNum[0] = 0;
-            currentLevel = 1;
+            currentLevel = 0;
             coin = 0;
             hasInitial = true;
             for (int i = 1; i < 100; i++)
@@ -135,6 +145,7 @@ public static class LevelManager
                 starNum[i] = 0;
             }
         }
+        Debug.Log("直接结束");
         Save();
     }
 
