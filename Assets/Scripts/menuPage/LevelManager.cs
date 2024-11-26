@@ -15,6 +15,7 @@ public static class LevelManager
     [SerializeField] public static bool hasInitial = false;//标记该用户是否被初始化过
 
 
+
     const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
 
     [System.Serializable]
@@ -32,8 +33,8 @@ public static class LevelManager
             _playerLevel = new int[100];
             _playerCoin = 0;
             _playStar = new int[100];
-            _currentLevel = 0;
-            _hasInitial = false;
+            _currentLevel = 2;
+            _hasInitial = true;
             _playerLevel[_currentLevel] = 1;
         }
     }
@@ -104,8 +105,8 @@ public static class LevelManager
     static private void Awake()
     {
         r = new System.Random();
-        Debug.Log("调用初始化");
-        InitialUserData();
+         Debug.Log("调用初始化");
+         InitialUserData();
     }
 
 
@@ -128,6 +129,7 @@ public static class LevelManager
     static void InitialUserData()
     {
         LoadFromJson();
+        //为什么这里loadfromjson 后就不执行了呢？
         Debug.Log("打印初始化状态"+LevelManager.hasInitial);
         if (!hasInitial)
         {

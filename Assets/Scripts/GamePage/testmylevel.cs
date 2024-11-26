@@ -10,9 +10,9 @@ public class testmylevel : MonoBehaviour
        // levelManager = FindObjectOfType<LevelManager>();
     }
 
-    public void wingame()
+   /* public void wingame()
     {
         LevelManager.SetLevel_Star(LevelManager.currentLevel, 3);
         LevelManager.currentLevel++;
-    }
+    }*/
 }

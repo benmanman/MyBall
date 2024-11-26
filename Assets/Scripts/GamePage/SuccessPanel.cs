@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,11 +42,15 @@ public class SuccessPanel : MonoBehaviour
 
     public void ShowGameWin(bool show)
     {
-        //记录本关的数据,待修改为实际数字
-        LevelManager.starNum[LevelManager.currentLevel] = 2;
-        LevelManager.levelPass[LevelManager.currentLevel] = 1;
-        LevelManager.currentLevel++;
-        LevelManager.Save();
+        //若游戏成功则记录本关的数据,待修改为实际数字
+        if (show)
+        {
+            LevelManager.starNum[LevelManager.currentLevel] = 2;
+            LevelManager.levelPass[LevelManager.currentLevel] = 1;
+            LevelManager.currentLevel++;
+            LevelManager.Save();
+        }
+
         //游戏成功弹窗显示
         this.gameObject.SetActive(show);
     }

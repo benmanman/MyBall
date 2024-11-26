@@ -25,12 +25,14 @@ public class ScoreManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //若游戏成功的弹窗没有展示，则调用展示函数
         if (!successPanel.isActiveAndEnabled)
         {
             scoreText.text = "" + score;
             if (score >= 10 && ballController.currentBallState == BallController.ballState.aim)
             {
                 successPanel.ShowGameWin(true);
+                score = 0;//游戏成功后将得分置为 0
             }
         }
        
