@@ -15,7 +15,8 @@ public class CreateLevel : MonoBehaviour
     {
         //生成 100 个关卡
         //levelManager = FindObjectOfType<LevelManager>();
-        Debug.Log("start函数中levelmanager的玩家姓名" + LevelManager.playerName);
+        Debug.Log("生成关卡menu,start函数中levelmanager的玩家姓名" + LevelManager.playerName);
+        Debug.Log("调用了levelmanager 的load 函数");
         LevelManager.Load();
         createMyLevel(100);
     }

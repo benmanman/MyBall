@@ -26,6 +26,7 @@ public class NormalLevelMgr : MonoBehaviour
         //情况 1：已解锁未选中，情况 2：已解锁已选中，情况 3：未解锁
         //先设置背景图片，关卡数字
         bool isSelect;
+        //我一直不太理解的为啥我levelmanager 里面的current level 设置为 0 的时候，第一个关卡是显示为不可点击状态 的，原因就在这里，因为我这里的levelnum 是reellevel，所以默认是从 1 开始的，所有我的currentlevel 必须从 1 开始
         if(levelNum == LevelManager.currentLevel)
         {
             isSelect = true;

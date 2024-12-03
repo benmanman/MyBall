@@ -33,7 +33,7 @@ public static class LevelManager
             _playerLevel = new int[100];
             _playerCoin = 0;
             _playStar = new int[100];
-            _currentLevel = 2;
+            _currentLevel = 1;
             _hasInitial = true;
             _playerLevel[_currentLevel] = 1;
         }
@@ -69,12 +69,13 @@ public static class LevelManager
         {
             saveData = new SaveMyUserData();
             //
-            Debug.Log("这里拿到的是空的");
+            Debug.Log("因为是空的所以生成了一个新的数据"+ saveData);
         }
         loadData(saveData);
+        
     }
 
-    // 声明一个data class ，然后把各个变量进行复制并返回class类型
+    // 声明一个data class ，然后把各个变量进行赋值并返回class类型
     static SaveMyUserData SavingData()
     {
         var PlayerData = new SaveMyUserData();
@@ -90,24 +91,21 @@ public static class LevelManager
 
     static void loadData(SaveMyUserData PlayerData)
     {
+        Debug.Log("调用了loaddata函数");
         playerName = PlayerData._playerName;
-        Debug.Log("这是load data"+playerName);
         levelPass = PlayerData._playerLevel;
-        Debug.Log("这是load data" + levelPass[0]);
         coin = PlayerData._playerCoin;
         starNum = PlayerData._playStar;
         currentLevel = PlayerData._currentLevel;
-        Debug.Log("这是load data" + currentLevel);
         hasInitial =PlayerData._hasInitial;
-        Debug.Log("load结束");
     }
 
-    static private void Awake()
+    /*static private void Awake()
     {
         r = new System.Random();
          Debug.Log("调用初始化");
          InitialUserData();
-    }
+    }*/
 
 
     //因为生成的物体会从左到右，但是关卡是 S 型的，所以需要转化一下生成真实的关卡
@@ -134,9 +132,7 @@ public static class LevelManager
         if (!hasInitial)
         {
             playerName = "New User Blue"+r.Next(1,10);
-            Debug.Log(playerName);
             levelPass[0] = 1;
-            Debug.Log(levelPass[0]);
             starNum[0] = 0;
             currentLevel = 0;
             coin = 0;
