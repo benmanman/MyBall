@@ -1,14 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SuccessPanel : MonoBehaviour
 {
     //控制成功弹窗的星星数、礼物盒子进度、关闭按钮、开始下一关
 
     // Start is called before the first frame update
+
+    public Sprite[] stars = new Sprite[2];//装星星图片
+    public Image[] starBg = new Image[5];//获得显示星星的区域，4-6 是第1-3 颗星星
+
     void Start()
     {
         ShowGameWin(false);
+        starBg = GetComponentsInChildren<Image>();
+        
     }
 
     // Update is called once per frame
@@ -47,16 +54,26 @@ public class SuccessPanel : MonoBehaviour
         if (show)
         {
             //将当前成功的关卡记上星星和过关
-            LevelManager.starNum[LevelManager.currentLevel] = 2;
+            ShowStars();
             LevelManager.levelPass[LevelManager.currentLevel+1] = 1;
             
             LevelManager.currentLevel++;
-            Debug.Log("用户关卡加一"+ LevelManager.currentLevel);
             LevelManager.Save();
         }
 
         //游戏成功弹窗显示
         this.gameObject.SetActive(show);
+    }
+
+    private void ShowStars()
+    {
+        int n = LevelManager.starNum[LevelManager.currentLevel];
+        Debug.Log(n);
+        while(n>0)
+        {
+            starBg[3 + n].sprite = stars[1];
+            n--;
+        }
     }
 
 }

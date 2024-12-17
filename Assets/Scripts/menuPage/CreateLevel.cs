@@ -14,11 +14,10 @@ public class CreateLevel : MonoBehaviour
     void Start()
     {
         //生成 100 个关卡
-        //levelManager = FindObjectOfType<LevelManager>();
         Debug.Log("生成关卡menu,start函数中levelmanager的玩家姓名" + LevelManager.playerName);
         Debug.Log("调用了levelmanager 的load 函数");
         LevelManager.Load();
-        createMyLevel(100);
+        createMyLevel(30);
     }
 
     // Update is called once per frame

@@ -8,12 +8,12 @@ public static class LevelManager
     private static System.Random r;
 
     [SerializeField] public static string playerName = "PlayerName88";//用户名字
-    [SerializeField] public static int[] levelPass= new int[100];//用户所有关卡的通关信息，0 是未通过，1 是已通过
+    [SerializeField] public static int[] levelPass= new int[30];//用户所有关卡的通关信息，0 是未通过，1 是已通过
     [SerializeField] public static int coin = 0;//用户金币
-    [SerializeField] public static int[] starNum = new int[100];//用户每个关卡对应的星星数
+    [SerializeField] public static int[] starNum = new int[30];//用户每个关卡对应的星星数
     [SerializeField] public static int currentLevel = 0;//用户当前关卡
     [SerializeField] public static bool hasInitial = false;//标记该用户是否被初始化过
-
+    [SerializeField] public static int[] levelTotalScore = { 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30};//用户每个关卡满分是多少
 
 
     const string MY_PLAYER_DATA_FILE_NAME = "MyPlayerData.blue";
@@ -25,14 +25,16 @@ public static class LevelManager
         public int[] _playerLevel;
         public int _playerCoin;
         public int[] _playStar;
+        public int[] _levelTotalScore;
         public int _currentLevel;
         public bool _hasInitial;
         public SaveMyUserData()
         {
             _playerName = "PlayerName66";
-            _playerLevel = new int[100];
+            _playerLevel = new int[30];
             _playerCoin = 0;
-            _playStar = new int[100];
+            _playStar = new int[30];
+            _levelTotalScore = new int[] { 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30, 10, 20, 30};
             _currentLevel = 1;
             _hasInitial = true;
             _playerLevel[_currentLevel] = 1;
@@ -86,6 +88,7 @@ public static class LevelManager
         PlayerData._playStar = starNum;
         PlayerData._currentLevel = currentLevel;
         PlayerData._hasInitial = hasInitial;
+        PlayerData._levelTotalScore = levelTotalScore;
         return PlayerData;
     }
 
@@ -98,6 +101,7 @@ public static class LevelManager
         starNum = PlayerData._playStar;
         currentLevel = PlayerData._currentLevel;
         hasInitial =PlayerData._hasInitial;
+        levelTotalScore = PlayerData._levelTotalScore;
     }
 
     /*static private void Awake()
