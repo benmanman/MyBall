@@ -28,9 +28,6 @@ public class BrickHealthManager : MonoBehaviour
         if (brickHealth <= 0)
         {
             scoreManager.IncreaseScore(1);
-            //Destroy Brick
-           // Instantiate(birckDestroyPartical, transform.position, Quaternion.identity);
-            //this.gameObject.SetActive(false);
             gameManager.bricksInScene.Remove(this.gameObject);
             Destroy(this.gameObject);
 

@@ -60,12 +60,6 @@ public class BallStop : MonoBehaviour
                 other.transform.DOMove(LaunchPosition, 0.3f);
             }
             colletBallNum++;
-
-            // gameManager.ballsInScene.Remove(other.gameObject);
-            // other.transform.DOMove(AnotherPosition, 0.3f);
-            // Callback(() => other.gameObject.SetActive(false));
-
-            //other.gameObject.SetActive(false);
         }
     }
 }

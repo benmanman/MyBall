@@ -7,9 +7,6 @@ public class GamePageTopFunc : MonoBehaviour
 {
 
     public Text diamondsNum;
-    //private LevelManager levelManager;
-    //public System.Random r;
-    // Start is called before the first frame update
     void Start()
     {  
         diamondsNum.text = LevelManager.coin.ToString();

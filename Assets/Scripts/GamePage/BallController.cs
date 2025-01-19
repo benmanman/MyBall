@@ -126,7 +126,12 @@ public class BallController : MonoBehaviour
         }
         // mathf.rad2deg 是将弧度转成角度，反之则是角度转成弧度
         float theta = Mathf.Rad2Deg * Mathf.Atan(diffX / diffY);//得到角度
-        arrow.transform.rotation = Quaternion.Euler(0f, 0f, -theta);
+        /*if (theta < 10)
+        {
+            arrow.SetActive(false);
+            theta = 30;
+        }*/
+        arrow.transform.rotation = Quaternion.Euler(0f, -10f, -theta);
     }
 
     public void ReleaseMouse()
