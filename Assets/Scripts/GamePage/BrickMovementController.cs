@@ -39,7 +39,7 @@ public class BrickMovementController : MonoBehaviour
         {
             if (hasMoved == false)
             { 
-                transform.position = new Vector2(transform.position.x, transform.position.y-122);
+                transform.position = new Vector2(transform.position.x, transform.position.y-160);
                 currentState = brickState.stop;
                 //在方块移动结束后，将球的状态设置为可瞄准
                 ballController.currentBallState = BallController.ballState.aim;

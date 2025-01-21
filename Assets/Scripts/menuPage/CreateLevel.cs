@@ -44,6 +44,7 @@ public class CreateLevel : MonoBehaviour
     {
         GameObject tempObj= Instantiate(giftLevel);
         tempObj.transform.SetParent(levelFatherTransform);
+        tempObj.transform.localScale = Vector3.one;
         tempObj.GetComponentInChildren<GiftLevelMgr>().SetGiftLevel(levelNum);
 
     }
@@ -52,6 +53,7 @@ public class CreateLevel : MonoBehaviour
     {
         GameObject tempObj = Instantiate(normalLevel);
         tempObj.transform.SetParent(levelFatherTransform);
+        tempObj.transform.localScale = Vector3.one;
         //instantiate 出来的物体无法直接访问脚本上的方法，需要先获取脚本
         tempObj.GetComponentInChildren<NormalLevelMgr>().SetNormalLevel(levelNum);
     }

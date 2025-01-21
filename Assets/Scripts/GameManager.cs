@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
         GameObject levelObj = Instantiate(level1);
         levelObj.transform.SetParent(fatherTransform);
         levelObj.transform.localPosition = new Vector3(0,0,0);
+        levelObj.transform.localScale = Vector3.one;
         CreateNewBrick(1, 3);
-        Debug.Log("第一个坐标"+spawnPoints[0].transform.position);
         
     }
 
@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject tmpobj = Instantiate(squareBrick, spawnPoints[i].position, Quaternion.identity);
                 tmpobj.transform.SetParent(fatherTransform);
+                tmpobj.transform.localScale = Vector3.one;
                 if (tmpobj != null)
                 {
                     Text tempText = tmpobj.GetComponentInChildren<Text>();
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject tmpobj = Instantiate(triangleBrick, spawnPoints[i].position, Quaternion.identity);
                 tmpobj.transform.SetParent(fatherTransform);
+                tmpobj.transform.localScale = Vector3.one;
                 if (tmpobj != null) { 
                     Text tempText = tmpobj.GetComponentInChildren<Text>();
                     tempText.text = "" + brickHealth;
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour
             {
                 GameObject tmpobj = Instantiate(extraBallPowerup, spawnPoints[i].position, Quaternion.identity);
                 tmpobj.transform.SetParent(fatherTransform);
+                tmpobj.transform.localScale = Vector3.one;
                 if (tmpobj != null)
                 {
                     bricksInScene.Add(tmpobj);
