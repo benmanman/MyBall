@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8275609767340773662}
   - component: {fileID: 8702460032653222281}
   m_Layer: 5
-  m_Name: Triangle Brick
+  m_Name: Triangle Brick 1
   m_TagString: Triangle Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_SizeDelta: {x: 168, y: 168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &425365583327234805
 CanvasRenderer:

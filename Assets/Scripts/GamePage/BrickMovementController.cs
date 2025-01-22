@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BrickMovementController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class BrickMovementController : MonoBehaviour
     //已经移动过的方块本次不再移动
     private bool hasMoved;
     private BallController ballController;
+    private float objectHight;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,7 @@ public class BrickMovementController : MonoBehaviour
         //游戏开始的时候所有的方块状态都是stop
         currentState = brickState.stop;
         ballController = FindAnyObjectByType<BallController>();
+       // objectHight = GetComponent<Image>().sprite.bounds.size.y*140;
     }
 
     // Update is called once per frame
@@ -38,8 +41,10 @@ public class BrickMovementController : MonoBehaviour
         if (currentState == brickState.move)
         {
             if (hasMoved == false)
-            { 
-                transform.position = new Vector2(transform.position.x, transform.position.y-160);
+            {
+                Debug.Log("之前的y："+transform.localPosition.y);
+                transform.localPosition = new Vector2(transform.localPosition.x, transform.localPosition.y - 170);
+                Debug.Log("之后的y：" + transform.localPosition.y);
                 currentState = brickState.stop;
                 //在方块移动结束后，将球的状态设置为可瞄准
                 ballController.currentBallState = BallController.ballState.aim;
