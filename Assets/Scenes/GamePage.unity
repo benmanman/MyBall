@@ -1583,9 +1583,9 @@ MonoBehaviour:
   - {fileID: 1766741637}
   - {fileID: 1318057241}
   squareBrick: {fileID: 2663259700405448023, guid: 9b4865f6ce42f47f5ac6f84b8be53298, type: 3}
-  triangleBrick: {fileID: 4978325392832070484, guid: a16bef1f93e0e48b0a6e68a8875c5399, type: 3}
+  triangleBrick: {fileID: 4978325392832070484, guid: f98585dde648043e6bddce1598e6e666, type: 3}
   extraBallPowerup: {fileID: 5709812563773183482, guid: f9624536786e741e09031186d3144de2, type: 3}
-  level1: {fileID: 3558534183306391197, guid: 4219dd746c01b4ddca43ba2cdf1e062a, type: 3}
+  level1: {fileID: 8875225624878572780, guid: 4219dd746c01b4ddca43ba2cdf1e062a, type: 3}
   level: 0
   bricksInScene: []
   ballsInScene: []

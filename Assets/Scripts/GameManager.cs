@@ -13,7 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject squareBrick;
     public GameObject triangleBrick;
     public GameObject extraBallPowerup;
+    //关卡的prefab和用来装关卡里所有子物体的数组
     public GameObject level1;
+    private GameObject[] levelgoods;
     //这是小球上的数字
     public int level;
     //一共有多少方块、三角形
@@ -30,6 +32,12 @@ public class GameManager : MonoBehaviour
         levelObj.transform.SetParent(fatherTransform);
         levelObj.transform.localPosition = new Vector3(0,0,0);
         levelObj.transform.localScale = Vector3.one;
+
+        foreach(Transform child in levelObj.transform)
+        {
+            bricksInScene.Add(child.gameObject);
+        }
+
         CreateNewBrick(1, 3);
         
     }
